@@ -1,0 +1,15 @@
+---
+# tasks file for webserver
+- name: Install packages
+  package:
+    name: "{{ webserver_packages }}"
+    state: latest
+
+- name: Add base NGINX configuration file
+  template:
+    dest: /var/www/html
+    src: info.index
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart httpd
